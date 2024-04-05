@@ -3988,7 +3988,7 @@ GameObject:
   - component: {fileID: 216389662}
   - component: {fileID: 216389661}
   - component: {fileID: 216389660}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 15_degrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5238,7 +5238,7 @@ GameObject:
   - component: {fileID: 339471968}
   - component: {fileID: 339471967}
   - component: {fileID: 339471966}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 45_degrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5616,7 +5616,7 @@ GameObject:
   - component: {fileID: 359860867}
   - component: {fileID: 359860866}
   - component: {fileID: 359860865}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 45_degrees (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9688,7 +9688,7 @@ GameObject:
   - component: {fileID: 654982218}
   - component: {fileID: 654982217}
   - component: {fileID: 654982216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 30_degrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10397,7 +10397,7 @@ GameObject:
   - component: {fileID: 694471959}
   - component: {fileID: 694471961}
   - component: {fileID: 694471960}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11110,7 +11110,7 @@ GameObject:
   - component: {fileID: 789771455}
   - component: {fileID: 789771457}
   - component: {fileID: 789771456}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11284,7 +11284,7 @@ GameObject:
   - component: {fileID: 807474826}
   - component: {fileID: 807474825}
   - component: {fileID: 807474824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 10_degrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11733,13 +11733,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811304131}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.084286526, y: 0, z: 0, w: 0.9964416}
-  m_LocalPosition: {x: 0, y: 0.6, z: -2.43}
+  m_LocalRotation: {x: 0.14124683, y: 0, z: 0, w: 0.9899745}
+  m_LocalPosition: {x: 0, y: 1.36, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1097084206}
-  m_LocalEulerAnglesHint: {x: 9.67, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.24, y: 0, z: 0}
 --- !u!1 &819081876
 GameObject:
   m_ObjectHideFlags: 0
@@ -12621,7 +12621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 866972617}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slopes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12663,7 +12663,7 @@ GameObject:
   - component: {fileID: 878425791}
   - component: {fileID: 878425790}
   - component: {fileID: 878425789}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 5_degrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13038,7 +13038,7 @@ GameObject:
   - component: {fileID: 882746196}
   - component: {fileID: 882746198}
   - component: {fileID: 882746197}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14275,10 +14275,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.26050887
+  m_Height: 1.6930557
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.11888009, z: 0}
 --- !u!4 &1097084206
 Transform:
   m_ObjectHideFlags: 0
@@ -14288,7 +14288,7 @@ Transform:
   m_GameObject: {fileID: 1097084202}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.729, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14313,8 +14313,8 @@ MonoBehaviour:
   _jumpBehaviour: {fileID: 1097084210}
   _cameraTransform: {fileID: 0}
   _enableLog: 0
-  _speed: 10
-  _acceleration: 4
+  _speed: 20
+  _acceleration: 10
   _rotationSpeed: 0.5
 --- !u!114 &1097084208
 MonoBehaviour:
@@ -14334,7 +14334,9 @@ MonoBehaviour:
   _floorMask:
     serializedVersion: 2
     m_Bits: 8
-  _floorCheckOffset: {x: 0, y: 0.001, z: 0}
+  _maxAngleToWalk: 45
+  _angleTreshold: 5
+  _floorCheckOffset: {x: 0, y: 0.72, z: 0}
 --- !u!54 &1097084209
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14343,7 +14345,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097084202}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.5
   m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14375,7 +14377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 1097084208}
-  _jumpForce: 8
+  _jumpForce: 10
   _maxJumpQty: 2
   _floorAngle: 60
   _enableLog: 0
@@ -15135,7 +15137,7 @@ GameObject:
   - component: {fileID: 1243015398}
   - component: {fileID: 1243015400}
   - component: {fileID: 1243015399}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18256,7 +18258,7 @@ GameObject:
   - component: {fileID: 1438351046}
   - component: {fileID: 1438351048}
   - component: {fileID: 1438351047}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20873,7 +20875,7 @@ Transform:
   m_GameObject: {fileID: 1740243186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24835,7 +24837,7 @@ GameObject:
   - component: {fileID: 1898726684}
   - component: {fileID: 1898726686}
   - component: {fileID: 1898726685}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25021,7 +25023,7 @@ Transform:
   m_GameObject: {fileID: 1926547327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.279, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
