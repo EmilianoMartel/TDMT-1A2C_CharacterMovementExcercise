@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -95,6 +96,7 @@ public class CharacterBody : MonoBehaviour
                                     out var hit,
                                     _maxFloorDistance,
                                     _floorMask);
+
         if (!_currentMovement.IsValid()
             || velocity.magnitude >= _currentMovement.GoalSpeed || _actualAngle > _maxAngleToWalk - _angleTreshold)
             return;
