@@ -9328,6 +9328,7 @@ MonoBehaviour:
   _rigidBody: {fileID: 1097084209}
   _animator: {fileID: 624369132}
   _horSpeed: horSpeed
+  _zSpeed: zSpeed
 --- !u!95 &624369132 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 04bbad9c3dbf86748a4f5dfae171b8fe, type: 3}

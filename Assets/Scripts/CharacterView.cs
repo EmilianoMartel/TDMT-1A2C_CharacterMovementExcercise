@@ -8,7 +8,11 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private Animator _animator;
     [Header("Animator Parameters")]
     [SerializeField] private string _horSpeed = "horSpeed";
+    [SerializeField] private string _zSpeed = "zSpeed";
 
+
+    private float x;
+    private float y;
 
     private void Awake()
     {
@@ -31,7 +35,14 @@ public class CharacterView : MonoBehaviour
         var velocity = _rigidBody.velocity;
         velocity.y = 0;
         var speed = velocity.magnitude;
+        var xSpeed = velocity.x;
+        x = xSpeed;
+        var ySpeed = velocity.z;
+        y = ySpeed;
         if (_animator)
-            _animator.SetFloat(_horSpeed, speed);
+        {
+            _animator.SetFloat(_horSpeed, xSpeed);
+            _animator.SetFloat(_zSpeed, ySpeed);
+        }
     }
 }

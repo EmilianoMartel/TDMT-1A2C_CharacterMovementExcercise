@@ -37,7 +37,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8152481271561394616}
-    m_Position: {x: 290, y: 110, z: 0}
+    m_Position: {x: 290, y: 100, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -67,18 +67,42 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 04bbad9c3dbf86748a4f5dfae171b8fe, type: 3}
     m_Threshold: 6
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: 6, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: horSpeed
     m_Mirror: 0
-  m_BlendParameter: horSpeed
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 2bc1f36560e24f64cb1ed9ef83c23c79, type: 3}
+    m_Threshold: 12
+    m_Position: {x: 0, y: -3}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: horSpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: e0508ce15ad56f444ba33764cf39a4ac, type: 3}
+    m_Threshold: 18
+    m_Position: {x: 0, y: 3}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: horSpeed
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 5f3ab9a1e43d051448be0a0a74d1bce4, type: 3}
+    m_Threshold: 24
+    m_Position: {x: -6, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: horSpeed
+    m_Mirror: 0
+  m_BlendParameter: zSpeed
   m_BlendParameterY: horSpeed
   m_MinThreshold: 0
-  m_MaxThreshold: 6
+  m_MaxThreshold: 24
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -93,7 +117,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: zSpeed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
