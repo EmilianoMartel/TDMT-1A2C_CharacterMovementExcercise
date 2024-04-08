@@ -6,10 +6,13 @@ using UnityEngine;
 public class JumpBehavior : MonoBehaviour
 {
     [SerializeField] private CharacterBody _body;
+    [Header("Jump parameters")]
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _maxJumpQty = 1;
     private int _currentJumpQty = 0;
     [SerializeField] private float _floorAngle = 30;
+    [Header("View parameterrs")]
+    [SerializeField] private float _waitForAnimation = 0.5f;
     [SerializeField] private bool _enableLog = true;
 
     public event Action onJump = delegate { };
@@ -27,11 +30,9 @@ public class JumpBehavior : MonoBehaviour
             return false;
         }
 
-        if (_enableLog)
-            Debug.Log($"{name}: jumped!");
-        _currentJumpQty++;
-        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _jumpForce));
+        
         onJump.Invoke();
+        StartCoroutine(Jump());
         return true;
     }
 
@@ -49,5 +50,15 @@ public class JumpBehavior : MonoBehaviour
 
         if (_enableLog)
             Debug.Log($"{name}: Collided with normal angle: {contactAngle}");
+    }
+
+    private IEnumerator Jump()
+    {
+        yield return new WaitForSeconds( _waitForAnimation );
+        if (_enableLog)
+            Debug.Log($"{name}: jumped!");
+        _currentJumpQty++;
+        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _jumpForce));
+        
     }
 }

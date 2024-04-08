@@ -26,7 +26,7 @@ public class CharacterBody : MonoBehaviour
 
     [SerializeField] private Vector3 _floorCheckOffset = new Vector3(0, 0.001f, 0);
 
-    public bool IsFalling { private set; get; }
+    public bool isFalling { private set; get; }
 
     private void Reset()
     {
@@ -91,7 +91,7 @@ public class CharacterBody : MonoBehaviour
     {
         var velocity = _rigidbody.velocity;
         velocity.y = 0;
-        IsFalling = !Physics.Raycast(transform.position - _floorCheckOffset,
+        isFalling = !Physics.Raycast(transform.position - _floorCheckOffset,
                                     transform.TransformDirection(Vector3.down),
                                     out var hit,
                                     _maxFloorDistance,
@@ -102,7 +102,7 @@ public class CharacterBody : MonoBehaviour
             return;
         var accelerationVector = _currentMovement.GetAccelerationVector();
 
-        if (!IsFalling)
+        if (!isFalling)
         {
             accelerationVector = Vector3.ProjectOnPlane(accelerationVector, hit.normal);
             Debug.DrawRay(transform.position, accelerationVector, Color.cyan);

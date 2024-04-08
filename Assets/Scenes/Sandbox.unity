@@ -9327,8 +9327,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 1097084209}
   _animator: {fileID: 624369132}
-  _horSpeed: horSpeed
+  _jumpBehavior: {fileID: 1097084210}
+  _xSpeed: xSpeed
   _zSpeed: zSpeed
+  _isJumping: isJumping
 --- !u!95 &624369132 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 04bbad9c3dbf86748a4f5dfae171b8fe, type: 3}
@@ -14417,6 +14419,7 @@ MonoBehaviour:
   _jumpForce: 10
   _maxJumpQty: 2
   _floorAngle: 60
+  _waitForAnimation: 0.5
   _enableLog: 0
 --- !u!43 &1127823746
 Mesh:
