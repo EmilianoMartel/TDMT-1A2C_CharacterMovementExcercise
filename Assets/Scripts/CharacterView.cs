@@ -7,10 +7,12 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private Animator _animator;
     [SerializeField] private JumpBehavior _jumpBehavior;
+    [SerializeField] private CharacterBody _characterBody;
     [Header("Animator Parameters")]
     [SerializeField] private string _xSpeed = "xSpeed";
     [SerializeField] private string _zSpeed = "zSpeed";
     [SerializeField] private string _isJumping = "isJumping";
+    [SerializeField] private string _isFalling = "isFalling";
 
     private void OnEnable()
     {
@@ -57,6 +59,7 @@ public class CharacterView : MonoBehaviour
         {
             _animator.SetFloat(_xSpeed, xSpeed);
             _animator.SetFloat(_zSpeed, ySpeed);
+            _animator.SetBool(_isFalling, _characterBody.isFalling);
         }
     }
 

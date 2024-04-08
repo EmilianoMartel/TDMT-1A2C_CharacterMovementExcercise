@@ -9328,9 +9328,11 @@ MonoBehaviour:
   _rigidBody: {fileID: 1097084209}
   _animator: {fileID: 624369132}
   _jumpBehavior: {fileID: 1097084210}
+  _characterBody: {fileID: 1097084208}
   _xSpeed: xSpeed
   _zSpeed: zSpeed
   _isJumping: isJumping
+  _isFalling: isFalling
 --- !u!95 &624369132 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 04bbad9c3dbf86748a4f5dfae171b8fe, type: 3}
