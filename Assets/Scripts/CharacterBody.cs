@@ -82,7 +82,15 @@ public class CharacterBody : MonoBehaviour
     private void Break()
     {
         _rigidbody.AddForce(-_rigidbody.velocity * _brakeMultiplier, ForceMode.Impulse);
-        _isBrakeRequested = false;
+        if (_rigidbody.velocity.magnitude > 0.01)
+        {
+            _isBrakeRequested = true;
+        }
+        else
+        {
+            _isBrakeRequested = false;
+        }
+       
         if (_enableLog)
             Debug.Log($"{name}: Brake processed.");
     }
