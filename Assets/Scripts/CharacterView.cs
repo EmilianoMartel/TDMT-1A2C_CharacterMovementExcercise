@@ -8,6 +8,7 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private JumpBehavior _jumpBehavior;
     [SerializeField] private CharacterBody _characterBody;
+    [SerializeField] private BrainController _brainController;
     [Header("Animator Parameters")]
     [SerializeField] private string _xSpeed = "xSpeed";
     [SerializeField] private string _zSpeed = "zSpeed";
@@ -50,10 +51,10 @@ public class CharacterView : MonoBehaviour
 
     private void Update()
     {
-        var velocity = _rigidBody.velocity;
-        velocity.y = 0;
-        var xSpeed = velocity.x;
-        var ySpeed = velocity.z;
+        var input = _brainController.input;
+        var velocity = _rigidBody.velocity.magnitude;
+        var xSpeed = input.x * _rigidBody.velocity.magnitude;
+        var ySpeed = input.y * _rigidBody.velocity.magnitude;
         
         if (_animator)
         {

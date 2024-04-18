@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class InputReader : MonoBehaviour
 {
     public event Action<Vector2> onMovementInput = delegate { };
-    public event Action onJumpInput = delegate { };
+    public event Action<bool> onJumpInput = delegate { };
     public event Action<Vector2> onLookInput = delegate { };
 
     public void HandleMovementInput(InputAction.CallbackContext ctx)
@@ -18,7 +18,7 @@ public class InputReader : MonoBehaviour
     public void HandleJumpInput(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
-            onJumpInput.Invoke();
+            onJumpInput.Invoke(ctx.ReadValueAsButton());
 
     }
 

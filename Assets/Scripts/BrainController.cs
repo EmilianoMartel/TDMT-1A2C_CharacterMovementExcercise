@@ -16,9 +16,15 @@ public class BrainController : MonoBehaviour
     [SerializeField] private float _acceleration = 4;
     [SerializeField] private float _rotationSpeed = 1;
 
+    [SerializeField] private float _gravityMultiplyModifier = 1.5f;
+    private Vector3 _newGravity;
+    private Vector3 _basicGravity;
+
     private Quaternion _characterTargetRot;
     private bool _isJumping = false;
     private Vector2 _lastMovementInput;
+
+    public Vector2 input { get { return _lastMovementInput; }  }
 
     private void OnEnable()
     {
@@ -58,6 +64,10 @@ public class BrainController : MonoBehaviour
 
         if (!_cameraTransform)
             Debug.LogError($"{name}: {nameof(_cameraTransform)} is null!");
+
+        _basicGravity = Physics.gravity;
+        _newGravity = Physics.gravity;
+        _newGravity.y = _newGravity.y * _gravityMultiplyModifier;
     }
 
     private void Start()
@@ -90,7 +100,7 @@ public class BrainController : MonoBehaviour
         _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
     }
 
-    private void HandleJumpInput()
+    private void HandleJumpInput(bool isTriggered)
     {
         _jumpBehaviour.TryJump();
     }
@@ -112,10 +122,12 @@ public class BrainController : MonoBehaviour
     private void HandleIsJumping()
     {
         _isJumping = true;
+        Physics.gravity = _newGravity;
     }
 
     private void HandleOnLand()
     {
         _isJumping = false;
+        Physics.gravity = _basicGravity;
     }
 }

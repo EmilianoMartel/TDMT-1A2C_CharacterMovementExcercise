@@ -41,6 +41,7 @@ public class CharacterBody : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        
     }
 
     private void Update()
@@ -52,7 +53,6 @@ public class CharacterBody : MonoBehaviour
 
             _actualAngle = Vector3.Angle(vectorFrom, -vectorTo);
         }
-        
     }
 
     private void FixedUpdate()

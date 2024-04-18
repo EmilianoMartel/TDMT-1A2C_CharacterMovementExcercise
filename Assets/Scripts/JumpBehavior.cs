@@ -7,17 +7,19 @@ public class JumpBehavior : MonoBehaviour
 {
     [SerializeField] private CharacterBody _body;
     [Header("Jump parameters")]
-    [SerializeField] private float _jumpForce = 10;
+    [SerializeField] private float _minJumpForce = 10;
+    [SerializeField] private float _maxJumForce = 15;
     [SerializeField] private int _maxJumpQty = 1;
     private int _currentJumpQty = 0;
     [SerializeField] private float _floorAngle = 30;
+
     [Header("View parameterrs")]
     [SerializeField] private float _waitForAnimation = 0.5f;
     [SerializeField] private bool _enableLog = true;
 
     public event Action onJump = delegate { };
     public event Action onLand = delegate { };
-    
+
     private void Reset()
     {
         _body = GetComponent<CharacterBody>();
@@ -30,7 +32,6 @@ public class JumpBehavior : MonoBehaviour
             return false;
         }
 
-        
         onJump.Invoke();
         StartCoroutine(Jump());
         return true;
@@ -58,7 +59,6 @@ public class JumpBehavior : MonoBehaviour
         if (_enableLog)
             Debug.Log($"{name}: jumped!");
         _currentJumpQty++;
-        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _jumpForce));
-        
+        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _minJumpForce));
     }
 }
