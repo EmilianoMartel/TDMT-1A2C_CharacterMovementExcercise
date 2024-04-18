@@ -82,14 +82,8 @@ public class CharacterBody : MonoBehaviour
     private void Break()
     {
         _rigidbody.AddForce(-_rigidbody.velocity * _brakeMultiplier, ForceMode.Impulse);
-        if (_rigidbody.velocity.magnitude > 0.01)
-        {
-            _isBrakeRequested = true;
-        }
-        else
-        {
-            _isBrakeRequested = false;
-        }
+
+        _isBrakeRequested = false;
        
         if (_enableLog)
             Debug.Log($"{name}: Brake processed.");
@@ -108,8 +102,9 @@ public class CharacterBody : MonoBehaviour
         if (!_currentMovement.IsValid()
             || velocity.magnitude >= _currentMovement.GoalSpeed || _actualAngle > _maxAngleToWalk - _angleTreshold)
             return;
-        var accelerationVector = _currentMovement.GetAccelerationVector();
 
+        var accelerationVector = _currentMovement.GetAccelerationVector();
+        
         if (!isFalling)
         {
             accelerationVector = Vector3.ProjectOnPlane(accelerationVector, hit.normal);
@@ -128,21 +123,5 @@ public class CharacterBody : MonoBehaviour
             _rigidbody.AddForce(request.GetForceVector(), ForceMode.Impulse);
         }
         _impulseRequests.Clear();
-    }
-
-    [ContextMenu("DrawNormal")]
-    private void DrawNormal()
-    {
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out var hit, 5, _floorMask))
-        {
-            Debug.Log("si");
-            Debug.DrawLine(transform.position,hit.point,Color.red,10f);
-            Debug.DrawLine(hit.point,hit.point + hit.normal,Color.cyan, 10f);
-            Vector3 pirulo = hit.point - transform.position;
-            Vector3 paparulo = hit.normal;
-            float angle = Vector3.Angle(paparulo, -pirulo);
-            Debug.Log(angle);
-        }
     }
 }

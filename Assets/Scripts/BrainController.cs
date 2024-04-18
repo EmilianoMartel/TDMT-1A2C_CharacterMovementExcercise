@@ -18,6 +18,7 @@ public class BrainController : MonoBehaviour
 
     private Quaternion _characterTargetRot;
     private bool _isJumping = false;
+    private Vector2 _lastMovementInput;
 
     private void OnEnable()
     {
@@ -66,6 +67,8 @@ public class BrainController : MonoBehaviour
 
     private void HandleMovementInput(Vector2 input)
     {
+
+        _lastMovementInput = input;
         if (_desiredDirection.magnitude > Mathf.Epsilon
                 && input.magnitude < Mathf.Epsilon && !_isJumping)
         {
@@ -77,11 +80,13 @@ public class BrainController : MonoBehaviour
         }
 
         _desiredDirection = new Vector3(input.x, 0, input.y);
+
         if (_cameraTransform)
         {
             _desiredDirection = _cameraTransform.TransformDirection(_desiredDirection);
             _desiredDirection.y = 0;
         }
+
         _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
     }
 
@@ -89,12 +94,19 @@ public class BrainController : MonoBehaviour
     {
         _jumpBehaviour.TryJump();
     }
-
+    
     private void HandleLookInput(Vector2 look)
     {
         float yRot = look.x * _rotationSpeed;
         _characterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
         transform.localRotation = _characterTargetRot;
+
+        if (_lastMovementInput.magnitude > Mathf.Epsilon && _cameraTransform)
+        {
+            _desiredDirection = _cameraTransform.TransformDirection(new Vector3(_lastMovementInput.x, 0, _lastMovementInput.y));
+            _desiredDirection.y = 0;
+            _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
+        }
     }
 
     private void HandleIsJumping()
