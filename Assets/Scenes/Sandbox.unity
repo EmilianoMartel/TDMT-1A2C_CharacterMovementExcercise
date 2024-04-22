@@ -14372,7 +14372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxFloorDistance: 0.1
-  _brakeMultiplier: 0.75
+  _brakeMultiplier: 0.6
   _enableLog: 0
   _floorMask:
     serializedVersion: 2
