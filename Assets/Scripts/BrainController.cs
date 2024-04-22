@@ -12,9 +12,7 @@ public class BrainController : MonoBehaviour
     [SerializeField] private bool _enableLog = true;
     private Vector3 _desiredDirection;
     [Header("Parameters")]
-    [SerializeField] private float _speed = 10;
-    [SerializeField] private float _acceleration = 4;
-    [SerializeField] private float _rotationSpeed = 1;
+    [SerializeField] private MovementData _moventenData;
 
     [SerializeField] private float _gravityMultiplyModifier = 1.5f;
     private Vector3 _newGravity;
@@ -86,7 +84,7 @@ public class BrainController : MonoBehaviour
 
         _desiredDirection = SetDesiredDirection(input);
 
-        _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
+        _characterBody.SetMovement(new MovementRequest(_desiredDirection, _moventenData.speed, _moventenData.acceletarion));
     }
 
     private void HandleJumpInput(bool isTriggered)
@@ -101,7 +99,7 @@ public class BrainController : MonoBehaviour
     
     private void HandleLookInput(Vector2 look)
     {
-        float yRot = look.x * _rotationSpeed;
+        float yRot = look.x * _moventenData.rotationSpeed;
         _characterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
         transform.localRotation = _characterTargetRot;
 
@@ -109,7 +107,7 @@ public class BrainController : MonoBehaviour
         {
             _desiredDirection = _cameraTransform.TransformDirection(new Vector3(_lastMovementInput.x, 0, _lastMovementInput.y));
             _desiredDirection.y = 0;
-            _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
+            _characterBody.SetMovement(new MovementRequest(_desiredDirection, _moventenData.speed, _moventenData.acceletarion));
         }
     }
 

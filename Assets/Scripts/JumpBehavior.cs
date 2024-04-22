@@ -7,9 +7,7 @@ public class JumpBehavior : MonoBehaviour
 {
     [SerializeField] private CharacterBody _body;
     [Header("Jump parameters")]
-    [SerializeField] private float _minJumpForce = 10;
-    [SerializeField] private float _maxJumForce = 15;
-    [SerializeField] private int _maxJumpQty = 1;
+    [SerializeField] private JumpData _jumpData;
     private int _currentJumpQty = 0;
     [SerializeField] private float _floorAngle = 30;
 
@@ -30,7 +28,7 @@ public class JumpBehavior : MonoBehaviour
 
     private void TryJump()
     {
-        if (_currentJumpQty >= _maxJumpQty)
+        if (_currentJumpQty >= _jumpData.maxJumpQty)
             return;
 
         onJump.Invoke();
@@ -72,7 +70,7 @@ public class JumpBehavior : MonoBehaviour
 
     public void HandleJump()
     {
-        _actualJumpForce = _minJumpForce;
+        _actualJumpForce = _jumpData.minJumpForce;
         _isIncrementedtJumpForce = true;
     }
 
@@ -88,9 +86,7 @@ public class JumpBehavior : MonoBehaviour
 
         _actualJumpForce += Time.deltaTime ;
 
-        if (_actualJumpForce >= _maxJumForce)
-        {
+        if (_actualJumpForce >= _jumpData.maxJumForce)
             TryJump();
-        }
     }
 }
