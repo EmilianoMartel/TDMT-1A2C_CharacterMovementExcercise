@@ -31,8 +31,10 @@ public class BrainController : MonoBehaviour
         _inputReader.onMovementInput += HandleMovementInput;
         _inputReader.onJumpInput += HandleJumpInput;
         _inputReader.onLookInput += HandleLookInput;
+        _inputReader.finishJumpInput += HandleFinishJump;
         _jumpBehaviour.onJump += HandleIsJumping;
         _jumpBehaviour.onLand += HandleOnLand;
+        
     }
 
     private void OnDisable()
@@ -40,6 +42,7 @@ public class BrainController : MonoBehaviour
         _inputReader.onMovementInput -= HandleMovementInput;
         _inputReader.onJumpInput -= HandleJumpInput;
         _inputReader.onLookInput -= HandleLookInput;
+        _inputReader.finishJumpInput -= HandleFinishJump;
         _jumpBehaviour.onJump -= HandleIsJumping;
         _jumpBehaviour.onLand -= HandleOnLand;
     }
@@ -77,32 +80,23 @@ public class BrainController : MonoBehaviour
 
     private void HandleMovementInput(Vector2 input)
     {
-
         _lastMovementInput = input;
-        if (_desiredDirection.magnitude > Mathf.Epsilon
-                && input.magnitude < Mathf.Epsilon && !_isJumping)
-        {
-            if (_enableLog)
-            {
-                Debug.Log($"{nameof(_desiredDirection)} magnitude: {_desiredDirection.magnitude}\t{nameof(input)} magnitude: {input.magnitude}");
-            }
-            _characterBody.RequestBrake();
-        }
 
-        _desiredDirection = new Vector3(input.x, 0, input.y);
+        BrakeRequestLogic();
 
-        if (_cameraTransform)
-        {
-            _desiredDirection = _cameraTransform.TransformDirection(_desiredDirection);
-            _desiredDirection.y = 0;
-        }
+        _desiredDirection = SetDesiredDirection(input);
 
         _characterBody.SetMovement(new MovementRequest(_desiredDirection, _speed, _acceleration));
     }
 
     private void HandleJumpInput(bool isTriggered)
     {
-        _jumpBehaviour.TryJump();
+        _jumpBehaviour.HandleJump();
+    }
+
+    private void HandleFinishJump()
+    {
+        _jumpBehaviour.HandleFinishJump();
     }
     
     private void HandleLookInput(Vector2 look)
@@ -129,5 +123,31 @@ public class BrainController : MonoBehaviour
     {
         _isJumping = false;
         Physics.gravity = _basicGravity;
+    }
+
+    private void BrakeRequestLogic()
+    {
+        if (_desiredDirection.magnitude > Mathf.Epsilon
+                && input.magnitude < Mathf.Epsilon && !_isJumping)
+        {
+            if (_enableLog)
+            {
+                Debug.Log($"{nameof(_desiredDirection)} magnitude: {_desiredDirection.magnitude}\t{nameof(input)} magnitude: {input.magnitude}");
+            }
+            _characterBody.RequestBrake();
+        }
+    }
+
+    private Vector3 SetDesiredDirection(Vector2 input)
+    {
+        Vector3 tempDesiredDirection = new Vector3(input.x, 0, input.y);
+
+        if (_cameraTransform)
+        {
+            tempDesiredDirection = _cameraTransform.TransformDirection(tempDesiredDirection);
+            tempDesiredDirection.y = 0;
+        }
+
+        return tempDesiredDirection;
     }
 }

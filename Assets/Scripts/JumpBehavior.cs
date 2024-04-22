@@ -17,6 +17,9 @@ public class JumpBehavior : MonoBehaviour
     [SerializeField] private float _waitForAnimation = 0.5f;
     [SerializeField] private bool _enableLog = true;
 
+    private float _actualJumpForce = 0f;
+    private bool _isIncrementedtJumpForce = false;
+
     public event Action onJump = delegate { };
     public event Action onLand = delegate { };
 
@@ -25,16 +28,19 @@ public class JumpBehavior : MonoBehaviour
         _body = GetComponent<CharacterBody>();
     }
 
-    public bool TryJump()
+    private void TryJump()
     {
         if (_currentJumpQty >= _maxJumpQty)
-        {
-            return false;
-        }
+            return;
 
         onJump.Invoke();
         StartCoroutine(Jump());
-        return true;
+    }
+
+
+    private void Update()
+    {
+        IncrementJumpForce();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,10 +61,36 @@ public class JumpBehavior : MonoBehaviour
 
     private IEnumerator Jump()
     {
-        yield return new WaitForSeconds( _waitForAnimation );
+        yield return new WaitForSeconds(_waitForAnimation);
         if (_enableLog)
             Debug.Log($"{name}: jumped!");
         _currentJumpQty++;
-        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _minJumpForce));
+        _body.RequestImpulse(new ImpulseRequest(Vector3.up, _actualJumpForce));
+        _actualJumpForce = 0;
+        _isIncrementedtJumpForce = false;
+    }
+
+    public void HandleJump()
+    {
+        _actualJumpForce = _minJumpForce;
+        _isIncrementedtJumpForce = true;
+    }
+
+    public void HandleFinishJump()
+    {
+        TryJump();
+    }
+
+    private void IncrementJumpForce()
+    {
+        if (!_isIncrementedtJumpForce)
+            return;
+
+        _actualJumpForce += Time.deltaTime ;
+
+        if (_actualJumpForce >= _maxJumForce)
+        {
+            TryJump();
+        }
     }
 }

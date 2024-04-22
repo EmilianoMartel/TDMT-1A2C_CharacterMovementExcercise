@@ -14420,8 +14420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 1097084208}
-  _minJumpForce: 10
-  _maxJumForce: 15
+  _minJumpForce: 8
+  _maxJumForce: 10
   _maxJumpQty: 2
   _floorAngle: 60
   _waitForAnimation: 0.5
